@@ -1,0 +1,19 @@
+EventLog-Parser/.vs
+
+# Visual Studio files I don't think we need
+*.db-shm
+*.db-wal
+*.opendb
+*.iobj
+*.ipbd
+*.idb
+*.pdb
+*.suo
+*.tlog
+*.ilk
+*.psch
+*.vcxproj.user
+*.exp
+*.obj
+*.recipe
+*.log
