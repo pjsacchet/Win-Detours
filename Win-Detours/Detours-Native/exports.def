@@ -1,0 +1,4 @@
+LIBRARY DETOURSNATIVE
+
+EXPORTS
+	DoNativeDetours @1
