@@ -6,7 +6,6 @@
         // Launch a new instance of a binary with custom callbacks
         // Inject our detour'd functionality into an already running executable 
 
-
 #include "Win-Detours.h"
 
 typedef BOOL(__stdcall* DoNativeDetours)(); // exported from Detours-Native.dll
