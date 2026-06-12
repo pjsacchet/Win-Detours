@@ -1,5 +1,4 @@
-// 'Win-Detours.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//'main' process that will take input from the user and call into sub-projects to outline functionality offered by Detours
+
 
 // TODO: Make sub projects as dependencies for this project and include them in subdirectories
 
