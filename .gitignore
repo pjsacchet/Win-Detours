@@ -1,8 +1,8 @@
 Win-Detours/.vs
-Wind-Detours/Detours-Native/.vs
-Wind-Detours/Detours-Modify-Binary/.vs
-Wind-Detours/Detours-New-Process/.vs
-Wind-Detours/Detours-Inject/.vs
+Win-Detours/Detours-Native/.vs
+Win-Detours/Detours-Modify-Binary/.vs
+Win-Detours/Detours-New-Process/.vs
+Win-Detours/Detours-Inject/.vs
 
 # Visual Studio files I don't think we need
 *.db-shm
