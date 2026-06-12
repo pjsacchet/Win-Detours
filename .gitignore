@@ -1,4 +1,8 @@
 Win-Detours/.vs
+Detours-Native/.vs
+Detours-Modify-Binary/.vs
+Detours-New-Process/.vs
+Detours-Inject/.vs
 
 # Visual Studio files I don't think we need
 *.db-shm
