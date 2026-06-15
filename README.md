@@ -16,3 +16,8 @@ Startup a new instance of a binary and use Detours to inject your custom DLL wit
 ## Detour Functions in an Existing Process
 A bit of a stretch, but attempt to inject our Detours DLL into an already running process.
 
+# Getting Started
+If one were to want to build everything from scratch, you would need to build the detours lib and link your DLL/EXE to it yourself. I've added the detours repository as a extern (found in detours folder). In order to build it one would need to open a Visual Studio Developer command prompt, cd into the base of the directory and run 'nmake'. Once complete, you could find your compiled lib file in detours/lib.X86.
+
+*** think they have to do this in order to build since it will get built in that directory 
+
