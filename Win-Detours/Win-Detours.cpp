@@ -40,6 +40,46 @@ BOOL HandleNativeDetours()
 // Modify an existing binary via DetourBinaryEditImports()
 BOOL HandleModifyBinaryDetours()
 {
+    std::string inputFilePath, outputFilePath;
+    HMODULE detoursModifyLib;
+    ModifyExistingBinary modifyFunc;
+
+    // Take in path to binary we want to modify from the user
+    printf("Please input path to binary you would like modified: > ");
+
+    std::getline(std::cin, inputFilePath);
+
+    printf("Please input path to binary output location: > ");
+
+    std::getline(std::cin, outputFilePath);
+
+    detoursModifyLib = LoadLibrary(L"Detours-Modify-Binary.dll");
+    if (detoursModifyLib == NULL)
+    {
+        printf("ERROR; Failed LoadLibrary; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
+
+    // Call our function with params
+    modifyFunc = (ModifyExistingBinary)GetProcAddress(detoursModifyLib, "ModifyExistingBinary");
+    if (modifyFunc == NULL)
+    {
+        printf("ERROR; Failed GetProcAddress; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
+
+    if (!modifyFunc(inputFilePath, outputFilePath))
+    {
+        printf("ERROR; Failed ModifyExistingBinary; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
+
+    if (!FreeLibrary(detoursModifyLib))
+    {
+        printf("ERROR; Failed FreeLibrary; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
+
 
     return TRUE;
 }
@@ -68,6 +108,7 @@ void PrintHelp()
     printf("\t2) Modify an existing binary to call detour'd functions\n");
     printf("\t3) Launch an instance of a executable with detour'd functions\n");
     printf("\t4) Inject into an existing process in an attempt to detour existing functionality\n");
+    printf("> ");
 
     return;
 }

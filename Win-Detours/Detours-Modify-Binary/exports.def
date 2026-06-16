@@ -1,0 +1,4 @@
+LIBRARY DETOURSNATIVE
+
+EXPORTS
+	ModifyExistingBinary	@1
