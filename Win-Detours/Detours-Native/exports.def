@@ -1,4 +1,5 @@
 LIBRARY DETOURSNATIVE
 
 EXPORTS
-	DoNativeDetours @1
+	DoNativeDetours			@1
+	DoNativeDetoursCleanup	@2

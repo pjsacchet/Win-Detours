@@ -8,14 +8,11 @@
 
 #include "Win-Detours.h"
 
-typedef BOOL(__stdcall* DoNativeDetours)(); // exported from Detours-Native.dll
-
 
 // Call into our pre-built DLL that will display the baseline for using these custom callbacks 
 BOOL HandleNativeDetours()
 {
     HMODULE detoursNativeLib;
-    DoNativeDetours doNativeDetours;
 
     // This functionality is held in our Detours-Native DLL so load that 
         // This DLL is a dependency so the path should be fine.... its also relative
@@ -27,24 +24,15 @@ BOOL HandleNativeDetours()
         return FALSE;
     }
 
-    doNativeDetours = GetProcAddress(detoursNativeLib, "DoNativeDetours");
-    if (doNativeDetours == NULL)
-    {
-        printf("ERROR; Failed GetProcAddressl error 0x%X\n", GetLastError());
-        return FALSE;
-    }
-
-    if (!doNativeDetours())
-    {
-        printf("ERROR Failed DoNativeDetours\n");
-        return FALSE;
-    }
+    // Now our Sleep function is hooked so test it! (along with any other functions we may want to hook into)
+    Sleep(5000);
 
     if (!FreeLibrary(detoursNativeLib))
     {
         printf("ERROR; Failed FreeLibrary; error 0x%X\n", GetLastError());
         return FALSE;
     }
+    
 
     return TRUE;
 }
@@ -84,6 +72,7 @@ void PrintHelp()
     return;
 }
 
+// Main entry point for executable 
 int main()
 {
     std::string choice;
