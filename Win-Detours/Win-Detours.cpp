@@ -5,7 +5,6 @@
         // Modify the export table of a existing binary to use custom callbacks 
         // Launch a new instance of a binary with custom callbacks
         // Inject our detour'd functionality into an already running executable 
-
 #include "Win-Detours.h"
 
 
@@ -45,11 +44,11 @@ BOOL HandleModifyBinaryDetours()
     ModifyExistingBinary modifyFunc;
 
     // Take in path to binary we want to modify from the user
-    printf("Please input path to binary you would like modified: > ");
+    printf("Please input path to binary you would like modified: > "); // should be Win-Detours-Test.exe
 
     std::getline(std::cin, inputFilePath);
 
-    printf("Please input path to binary output location: > ");
+    printf("Please input path to binary output location: > "); // whatever the user wants
 
     std::getline(std::cin, outputFilePath);
 
@@ -87,6 +86,46 @@ BOOL HandleModifyBinaryDetours()
 // Create a new instance of a binary via DetourCreateProcessWithDllEx()
 BOOL HandleNewProcessDetours()
 {
+    std::string targetBinary, callbackDLL;
+    HMODULE detoursNewProcessLib;
+    ModifyExistingBinary newProcFunc;
+    
+    // Take in path to binary we want to modify from the user
+    printf("Please input path to binary you would like to execute and hook into: > "); // should be Win-Detours-Test.exe
+
+    std::getline(std::cin, targetBinary);
+
+    printf("Please input path to DLL with implemented detours callbacks: > "); // should be Detours-Native.dll
+
+    std::getline(std::cin, callbackDLL);
+
+    detoursNewProcessLib = LoadLibrary(L"Detours-New-Process.dll");
+    if (detoursNewProcessLib == NULL)
+    {
+        printf("ERROR; Failed LoadLibrary; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
+
+    // Call our function with params
+    newProcFunc = (ModifyExistingBinary)GetProcAddress(detoursNewProcessLib, "DetoursNewProcess");
+    if (newProcFunc == NULL)
+    {
+        printf("ERROR; Failed GetProcAddress; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
+
+    if (!newProcFunc(targetBinary, callbackDLL))
+    {
+        printf("ERROR; Failed DetoursNewProcess; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
+
+    if (!FreeLibrary(detoursNewProcessLib))
+    {
+        printf("ERROR; Failed FreeLibrary; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
+
 
     return TRUE;
 }
