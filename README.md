@@ -50,7 +50,11 @@ At this point, the user should have all the dependencies needed to build the pro
 
 # References:
 - https://github.com/microsoft/Detours/wiki/DetourBinaryBywayCallback
-- 
+- https://github.com/microsoft/detours/wiki
+- https://github.com/microsoft/detours/wiki/OverviewInterception
+- https://github.com/microsoft/detours/wiki/Using-Detours
+- https://github.com/microsoft/detours/wiki/OverviewPayloads
+- https://github.com/microsoft/detours/wiki/Reference
 
 # TODO:
 - Add functionality for possibly injecting into an already running process
