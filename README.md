@@ -57,5 +57,4 @@ At this point, the user should have all the dependencies needed to build the pro
 - https://github.com/microsoft/detours/wiki/Reference
 
 # TODO:
-- Add functionality for possibly injecting into an already running process
 - Make builds easier by automating a lot of the detours steps for the user (build steps in Visual Studio)
