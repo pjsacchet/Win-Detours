@@ -133,6 +133,43 @@ BOOL HandleNewProcessDetours()
 // Inject into an already running process and attempt to use our callbacks that way
 BOOL HandleInjectProcessDetours()
 {
+    std::string pid, callbackDLL;
+    HMODULE detoursInjectLib;
+    DoDetoursInject injectFunc;
+
+    // Get PID of process we are going to inject into 
+    printf("Please enter PID of target process to inject into: \n\t> ");
+
+    std::getline(std::cin, pid);
+
+    printf("Please input path to DLL with implemented detours callbacks: > "); // should be Detours-Native.dll
+
+    std::getline(std::cin, callbackDLL);
+
+    detoursInjectLib = LoadLibrary(L"Detours-Inject.dll");
+    if (detoursInjectLib == NULL)
+    {
+        printf("ERROR; Failed LoadLibrary; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
+
+    injectFunc = (DoDetoursInject)GetProcAddress(detoursInjectLib, "DoDetoursInject");
+    if (injectFunc == NULL)
+    {
+        printf("ERROR; Failed GetProcAddress; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
+
+    if (!injectFunc(std::stoi(pid), callbackDLL))
+    {
+        printf("Failed DoDetoursInject!\n");
+        return FALSE;
+    }
+    if (!FreeLibrary(detoursInjectLib))
+    {
+        printf("ERROR; Failed FreeLibrary; error 0x%X\n", GetLastError());
+        return FALSE;
+    }
 
 
     return TRUE;

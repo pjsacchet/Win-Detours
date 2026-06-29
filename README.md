@@ -17,7 +17,7 @@ Taking an existing binary (of which the source is unknown) and modify it prior t
 Startup a new instance of a binary and use Detours to inject your custom DLL with callbacks that will be invoked. Done via setting the aforementioned process in a suspended state and importing ouur DLL prior to runtime. Builds as a DLL.
 
 ## Detour Functions in an Existing Process
-A bit of a stretch, but attempt to inject our Detours DLL into an already running process. This has not yet been implemented. 
+Inject into an existing process with your built detours dll and idetnified target PID.
 
 ## Win-Detours-Test
 Test executable with Sleep function invoke. If this import table is modified or our detours DLL is injected prior to execution we should see our callback invoked instead of just the Sleep call. Builds as a executable.
@@ -46,7 +46,7 @@ At this point, the user should have all the dependencies needed to build the pro
 
 *\Win-Detours\Win-Detours\Debug*
 
-'Win-Detours.exe' will be the main executbale for interfacing with the Detours library functionality.
+'Win-Detours.exe' will be the main executable for interfacing with the Detours library functionality.
 
 # References:
 - https://github.com/microsoft/Detours/wiki/DetourBinaryBywayCallback

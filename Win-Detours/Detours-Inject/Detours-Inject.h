@@ -3,3 +3,5 @@
 
 #include <Windows.h>
 #include <iostream>
+
+BOOL DoDetoursInject(UINT32 pid, std::string detoursDLL);

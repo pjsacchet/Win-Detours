@@ -38,8 +38,16 @@ BOOL DoDetoursInject(UINT32 pid, std::string detoursDLL)
 		return FALSE;
 	}
 
-	hThread = 
+	hThread = CreateRemoteThread(hProc, NULL, 0, (LPTHREAD_START_ROUTINE)LoadLibraryA, mem, 0, NULL);
+	if (hThread == NULL)
+	{
+		printf("ERROR; Failed CreateRemoteThread; error 0x%x\n", GetLastError());
+		return FALSE;
+	}
 
+	// Cleanup
+	VirtualFreeEx(hProc, mem, 0, MEM_RELEASE);
+	CloseHandle(hProc);
 
 
 	return TRUE;

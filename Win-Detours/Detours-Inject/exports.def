@@ -1,0 +1,4 @@
+LIBRARY DETOURSINJECT
+
+EXPORTS
+	DoDetoursInject	@1
